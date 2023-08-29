@@ -6,7 +6,7 @@ export class NavBar extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: true,
       buttonText: "Login",
     };
   }
@@ -14,7 +14,7 @@ export class NavBar extends Component {
   handleClick = () => {
     this.setState((prevState, prevProps) => ({
       isLoggedIn: !prevState.isLoggedIn,
-      buttonText: prevState.buttonText === "Login" ? "Log out" : "Login",
+      buttonText: prevState.buttonText === "Login" ? "Submit" : "Login",
     }));
   };
 
@@ -23,7 +23,16 @@ export class NavBar extends Component {
       <div className={css.NavBar}>
         <h1>My Gallery</h1>
         <div>
-          <span>Hello {this.state.isLoggedIn ? "User" : "Guest"}</span>
+          {this.state.isLoggedIn ? null : (
+            <div>
+              <form action="" className={css["login-form"]}>
+                <label htmlFor="">Username: </label>
+                <input type="text" />
+                <label htmlFor="">Password: </label>
+                <input type="text" />
+              </form>
+            </div>
+          )}
           <button onClick={this.handleClick}>{this.state.buttonText}</button>
         </div>
       </div>
